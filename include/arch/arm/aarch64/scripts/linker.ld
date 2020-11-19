@@ -104,6 +104,10 @@ SECTIONS
     SECTION_PROLOGUE(_TEXT_SECTION_NAME,,)
     {
         _image_text_start = .;
+#ifdef CONFIG_AARCH64_IMAGE_HEADER
+        KEEP(*(.image_header))
+        KEEP(*(".image_header.*"))
+#endif
 
         _vector_start = .;
         KEEP(*(.exc_vector_table))
