@@ -1,0 +1,17 @@
+# Copyright 2020 EPAM Systems
+# SPDX-License-Identifier: Apache-2.0
+
+if SOC_R8A7795_A72
+
+config SOC
+	default "rcar_gen3"
+
+config NUM_IRQS
+	int
+	default 240
+
+config SYS_CLOCK_HW_CYCLES_PER_SEC
+	int
+	default 8300000
+
+endif
