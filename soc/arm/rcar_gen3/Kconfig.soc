@@ -1,0 +1,10 @@
+# Copyright 2020 Broadcom
+# SPDX-License-Identifier: Apache-2.0
+
+config SOC_R8A7795_A72
+	bool "Renesas H3 A72"
+	select ARM
+	select ARM64
+	select CPU_CORTEX_A72
+	select ARM_ARCH_TIMER
+	select GIC_V2
