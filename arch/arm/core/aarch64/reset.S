@@ -115,8 +115,29 @@ SECTION_SUBSEC_FUNC(TEXT,_reset_section,__start)
 	eret
 
 2:
-	/* Booting from EL2 is not supported */
-	b	.
+	/* Initialize VBAR */
+	msr	vbar_el2, x19
+	isb
+
+	/* Set EL1 to AArch64 */
+	mov	x0, xzr
+	orr	x0, x0, #(HCR_EL2_RW)
+	msr	hcr_el2, x0
+
+	/* initialize sctlr_el1 to reset value */
+	mov_imm	x0, SCTLR_EL1_RES1
+	msr	sctlr_el1, x0
+
+	/* Switch from EL2 to EL1 */
+	mov	x0, xzr
+	orr	x0, x0, #(DAIF_MASK)
+	orr	x0, x0, #(SPSR_EL2_TO_EL1)
+	orr	x0, x0, #(SPSR_EL2_h)
+	msr	spsr_el2, x0
+
+	adr	x0, 1f
+	msr	elr_el2, x0
+	eret
 
 1:
 	/* Initialize VBAR */
