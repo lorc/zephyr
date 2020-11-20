@@ -1,0 +1,7 @@
+# Copyright (c) 2020 EPAM Systems
+# SPDX-License-Identifier: Apache-2.0
+
+config COUNTER_RCAR_TMU
+	bool "Renesas RCAR TMU"
+	help
+	  Enable support for the Renesas RCAR Timer Module Unit.
