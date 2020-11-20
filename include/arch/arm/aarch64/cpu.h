@@ -64,6 +64,10 @@
 #define HCR_EL2_FMO		BIT(3)
 #define HCR_EL2_IMO		BIT(4)
 #define HCR_EL2_AMO		BIT(5)
+#define HCR_EL2_RW		BIT(31)
+
+#define SPSR_EL2_h		BIT(0)
+#define SPSR_EL2_TO_EL1	(0x2 << 1)
 
 #define SPSR_EL3_h		BIT(0)
 #define SPSR_EL3_TO_EL1		(0x2 << 1)
