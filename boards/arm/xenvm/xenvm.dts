@@ -87,4 +87,12 @@
 		current-speed = <0x1c200>;
 		label = "UART";
 	};
+
+	tmu: tmu@e6fd0000 {
+		compatible = "renesas,tmu";
+		reg = <0x00 0xe6fd0000 0x00 0x30>;
+		interrupts = <GIC_SPI 303 IRQ_TYPE_LEVEL IRQ_DEFAULT_PRIORITY>;
+		label = "TMU";
+	};
+
 };

@@ -23,6 +23,11 @@ static const struct arm_mmu_region mmu_regions[] = {
 			      DT_REG_ADDR(DT_INST(0, arm_sbsa_uart)),
 			      DT_REG_SIZE(DT_INST(0, arm_sbsa_uart)),
 			      MT_DEVICE_nGnRnE | MT_P_RW_U_RW | MT_NS),
+
+	MMU_REGION_FLAT_ENTRY("TMU",
+			      DT_REG_ADDR(DT_INST(0, renesas_tmu)),
+			      ROUND_UP(DT_REG_SIZE(DT_INST(0, renesas_tmu)), 4096),
+			      MT_DEVICE_nGnRnE | MT_P_RW_U_RW | MT_NS),
 };
 
 const struct arm_mmu_config mmu_config = {
