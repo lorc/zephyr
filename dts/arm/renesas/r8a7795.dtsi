@@ -1,0 +1,97 @@
+// SPDX-License-Identifier: GPL-2.0
+/*
+ * Device Tree Source for the R-Car H3 (R8A77950) SoC
+ *
+ * Copyright (C) 2015-2017 Renesas Electronics Corp.
+ * Copyright (C) 2020 EPAM Systems.
+ */
+
+#include <arm/armv8-a.dtsi>
+#include <dt-bindings/interrupt-controller/arm-gic.h>
+
+/ {
+	compatible = "renesas,r8a7795";
+	#address-cells = <2>;
+	#size-cells = <2>;
+
+	cpus {
+		#address-cells = <1>;
+		#size-cells = <0>;
+
+		cpu-map {
+			cluster0 {
+				core0 {
+					cpu = <&a57_0>;
+				};
+			};
+		};
+
+		a57_0: cpu@0 {
+			compatible = "arm,cortex-a57", "arm,armv8";
+			reg = <0x0>;
+			device_type = "cpu";
+			enable-method = "psci";
+		};
+
+	};
+
+	soc: soc {
+		compatible = "simple-bus";
+		interrupt-parent = <&gic>;
+
+		#address-cells = <2>;
+		#size-cells = <2>;
+		ranges;
+
+		gic: interrupt-controller@f1010000 {
+			compatible = "arm,gic-400", "arm,gic" ;
+			label = "GIC";
+			#interrupt-cells = <4>;
+			#address-cells = <0>;
+			interrupt-controller;
+			reg = <0x0 0xf1010000 0 0x1000>,
+			      <0x0 0xf1020000 0 0x20000>,
+			      <0x0 0xf1040000 0 0x20000>,
+			      <0x0 0xf1060000 0 0x20000>;
+			status = "okay";
+		};
+
+		cpg: clock-controller@e6150000 {
+			compatible = "renesas,r8a7795-cpg-mssr";
+			reg = <0 0xe6150000 0 0x1000>;
+			#clock-cells = <2>;
+			#power-domain-cells = <0>;
+			#reset-cells = <1>;
+			label = "CPG";
+		};
+
+		tmu: tmu@e6fc0000 {
+			compatible = "renesas,tmu";
+			reg = <0x00 0xe6fc0000 0x00 0x30>;
+			interrupts = <GIC_SPI 128 IRQ_TYPE_LEVEL IRQ_DEFAULT_PRIORITY>;
+			clocks = <&cpg 0 124>;
+			clock-names = "clk";
+			status = "disabled";
+			label = "TMU";
+		};
+
+		scif2: serial@e6e88000 {
+			compatible = "renesas,scif-r8a7795",
+				     "renesas,rcar-gen3-scif", "renesas,scif";
+			reg = <0 0xe6e88000 0 64>;
+			interrupts = <GIC_SPI 164 IRQ_TYPE_LEVEL IRQ_DEFAULT_PRIORITY>;
+			interrupt-names = "irq_0";
+			status = "disabled";
+			label = "UART_0";
+		};
+
+		arch_timer: timer {
+			compatible = "arm,arm-timer";
+			interrupts = <GIC_PPI 13 IRQ_TYPE_LEVEL IRQ_DEFAULT_PRIORITY>,
+			<GIC_PPI 14 IRQ_TYPE_LEVEL IRQ_DEFAULT_PRIORITY>,
+			<GIC_PPI 11 IRQ_TYPE_LEVEL IRQ_DEFAULT_PRIORITY>,
+			<GIC_PPI 10 IRQ_TYPE_LEVEL IRQ_DEFAULT_PRIORITY>;
+			label = "arch_timer";
+		};
+	};
+};

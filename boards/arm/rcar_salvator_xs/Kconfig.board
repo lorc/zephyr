@@ -1,0 +1,7 @@
+# Copyright (c) 2020 Volodymyr Babchuk <volodymyr.babchuk@epam.com>
+# SPDX-License-Identifier: Apache-2.0
+
+config BOARD_RCAR_SALVATOR_XS
+	bool "Renesas SALVATOR_XS"
+	depends on SOC_R8A7795_A72
+	select ARM64

@@ -1,0 +1,12 @@
+# Copyright (c) 2020 Volodymyr Babchuk <volodymyr.babchuk@epam.com>
+# SPDX-License-Identifier: Apache-2.0
+
+if BOARD_RCAR_SALVATOR_XS
+
+config BUILD_OUTPUT_BIN
+	default y
+
+config BOARD
+	default "rcar_salvator_xs"
+
+endif # BOARD_RCAR_SALVATOR_XS
