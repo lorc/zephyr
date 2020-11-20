@@ -1,0 +1,16 @@
+description: RCAR Clock Power Reset controller
+
+compatible: "renesas,r8a7795-cpg-mssr"
+
+include: [clock-controller.yaml, base.yaml]
+
+properties:
+    reg:
+      required: true
+
+    "#clock-cells":
+      const: 2
+
+clock-cells:
+  - mode
+  - id

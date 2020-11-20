@@ -1,0 +1,10 @@
+# Renesas Rcar Clock Pulse Generator Driver configuration options
+
+# Copyright (c) 2020 EPAM Systems
+# SPDX-License-Identifier: Apache-2.0
+
+config CLOCK_CONTROL_RCAR_CPG
+	bool "RCAR CPG driver"
+	depends on SOC_R8A7795_A72
+	help
+	  Renesas Rcar Clock Pulse Generator driver.
